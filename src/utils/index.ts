@@ -5,6 +5,14 @@ export const generateId = (): string => {
   return Math.random().toString(36).substr(2, 9);
 };
 
+// Get keypair path from settings (fallback to relative path)
+export const getKeypairPath = (keypairName: string, projectDirectory?: string): string => {
+  if (projectDirectory) {
+    return `${projectDirectory}/${keypairName}-keypair.json`;
+  }
+  return `./${keypairName}-keypair.json`;
+};
+
 // Format command with parameters
 export const formatCommand = (operation: TokenOperation, parameters: Record<string, any>): string => {
   let command = operation.command;
