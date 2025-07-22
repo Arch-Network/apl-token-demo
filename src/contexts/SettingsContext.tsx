@@ -33,17 +33,21 @@ interface SettingsProviderProps {
 }
 
 export const SettingsProvider: React.FC<SettingsProviderProps> = ({ children }) => {
+  console.log('SettingsProvider initializing');
   const [settings, setSettings] = useState<Settings>(() => {
     // Try to load from localStorage
     const saved = localStorage.getItem('apl-token-demo-settings');
+    console.log('Loading settings from localStorage:', saved);
     if (saved) {
       try {
         const parsed = JSON.parse(saved);
+        console.log('Parsed settings:', parsed);
         return { ...defaultSettings, ...parsed };
       } catch (e) {
         console.warn('Failed to parse saved settings:', e);
       }
     }
+    console.log('Using default settings:', defaultSettings);
     return defaultSettings;
   });
 
